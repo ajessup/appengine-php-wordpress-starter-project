@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>WordPress for Google App Engine by ajessup</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>WordPress for Google App Engine</h1>
+        <p>WordPress, super-charged to run on Google App Engine</p>
+
+        <p class="view"><a href="https://github.com/ajessup/appengine-php-wordpress-starter-project">View the Project on GitHub <small>ajessup/appengine-php-wordpress-starter-project</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/ajessup/appengine-php-wordpress-starter-project/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ajessup/appengine-php-wordpress-starter-project/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ajessup/appengine-php-wordpress-starter-project">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>This project will help you get started with Wordpress on Google App Engine.</p>
+
+<h2>
+<a name="prerequisites" class="anchor" href="#prerequisites"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
+
+<ol>
+<li><p>Install the <a href="https://developers.google.com/appengine/downloads#Google_App_Engine_SDK_for_PHP">PHP SDK for Google App Engine</a> on your local development environment</p></li>
+<li><p>Install <a href="http://dev.mysql.com/downloads/">MySQL 5.5</a> in your local development environment, if you haven't already</p></li>
+<li><p><a href="http://cloud.google.com/console">Sign up</a> for a Google Cloud Platform project, and
+set up a Cloud SQL instance, as described <a href="https://developers.google.com/cloud-sql/docs/instances">here</a> You'll want to name your Cloud SQL instance "wordpress" to match the config files provided here.</p></li>
+<li><p>Download the <a href="https://github.com/ajessup/appengine-php-wordpress-starter-project/blob/gh-pages/google-appengine-wordpress-latest.tgz">WordPress for Google App Engine</a> getting started project and extract it.</p></li>
+</ol><h2>
+<a name="edit-the-config-files" class="anchor" href="#edit-the-config-files"><span class="octicon octicon-link"></span></a>Edit the config files</h2>
+
+<p>Edit <code>wordpress/wp-config.php</code> and <code>app.yaml</code>, replacing <code>YOUR_PROJECT_ID</code> to match the Project ID (not the name) you entered in the Cloud Console when you signed up for a Google Cloud Platform project.</p>
+
+<h2>
+<a name="set-up-your-local-database" class="anchor" href="#set-up-your-local-database"><span class="octicon octicon-link"></span></a>Set up your local database</h2>
+
+<p>Using MySQL, run <code>setup.sql</code> to set up your local database. For a default installation (no root password) this would be: </p>
+
+<pre><code>/usr/local/mysql/bin/mysql -u root &lt; setup.sql
+</code></pre>
+
+<h2>
+<a name="run-wordpress" class="anchor" href="#run-wordpress"><span class="octicon octicon-link"></span></a>Run WordPress</h2>
+
+<p>To run WordPress locally on Windows and OS X, you can use the 
+<a href="https://developers.google.com/appengine/downloads#Google_App_Engine_SDK_for_PHP">Launcher</a> 
+by going to <strong>File &gt; Add Existing Project</strong> or you can run one of the commands below. </p>
+
+<p>On Mac and Windows, the default is to use the PHP binaries bundled with the SDK:</p>
+
+<pre><code>$ dev_appserver.py path_to_this_directory
+</code></pre>
+
+<p>On Linux, or to use your own PHP binaries, use:</p>
+
+<pre><code>$ dev_appserver.py --php_executable_path=PHP_CGI_EXECUTABLE_PATH path_to_this_directory
+</code></pre>
+
+<p>Now, with App Engine running locally, visit <code>http://localhost:8080/wp-admin/install.php</code> in your browser and run the setup process, changing the port number from 8080 if you aren't using the default. 
+You should be able to log in, and confirm that your app is ready to deploy. </p>
+
+<h3>
+<a name="deploy-to-app-engine" class="anchor" href="#deploy-to-app-engine"><span class="octicon octicon-link"></span></a>Deploy to App Engine</h3>
+
+<p>If all looks good, you can upload your application using the Launcher or by using this command:</p>
+
+<pre><code>$ appcfg.py update APPLICATION_DIRECTORY
+</code></pre>
+
+<p>Just like you had to do with the local database, you'll need to set up the Cloud SQL instance. The SDK includes tool for doing just that:</p>
+
+<pre><code>google_sql.py &lt;PROJECT_ID&gt;:wordpress &lt; setup.sql
+</code></pre>
+
+<p>This launches a browser window that authorizes the <code>google_sql.py</code> tool to connect to your Cloud SQL instance.</p>
+
+<p>Now, just like you did when WordPress was running locally, you'll need to run the install script by visiting:</p>
+
+<pre><code>http://&lt;PROJECT_ID&gt;.appspot.com/wp-admin/install.php
+</code></pre>
+
+<h2>
+<a name="thats-all-phew" class="anchor" href="#thats-all-phew"><span class="octicon octicon-link"></span></a>That's all! (PHEW)</h2>
+
+<p>Congratulations! You should now have a blog that loads rapidly, caches elegantly, 
+sends email properly, and can support adding images and other media to blog posts! Most importantly, 
+it will take advantage of Google's incredibly powerful infrastructure and scale gracefully to
+accommodate traffic that is hitting your blog.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/ajessup">ajessup</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
